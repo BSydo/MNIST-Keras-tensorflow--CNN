@@ -1,2 +1,4 @@
 # Distribution / packaging
 env/
+__pycache__/
+models/__pycache__
