@@ -1,1 +1,1 @@
-# MXNet-Keras on AWS SageMaker
+# MNIST-Keras-CNN
