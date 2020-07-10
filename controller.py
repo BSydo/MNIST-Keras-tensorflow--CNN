@@ -6,6 +6,8 @@ import preprocessor
 import data_loader
 import config
 
+from app import app
+
 os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
 class controller:
