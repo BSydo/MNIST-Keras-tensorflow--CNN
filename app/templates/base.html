@@ -1,0 +1,14 @@
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - MNiST</title>
+      {% else %}
+      <title>Welcome to MNiST</title>
+      {% endif %}
+    </head>
+    <body>
+        <div>MNiST: <a href="/index">Home</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
