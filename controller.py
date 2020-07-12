@@ -90,7 +90,7 @@ class controller:
         print('Test Loss:', score[0])
         print('Test accuracy:', score[1])
         
-    def predict(self, image:list) -> int:
+    def predict_draw(self, image) -> int:
         """[summary]
 
         Args:
@@ -100,7 +100,9 @@ class controller:
             int: [description]
         """
         
-        # image = preprocessor.preprocess_image(image)
+        print(type(image))
+        
+        image = preprocessor.preprocess_image(image)
         
         # open pickled cnn model
         cnn_saved_model = load_model(self.cnn_saved)
