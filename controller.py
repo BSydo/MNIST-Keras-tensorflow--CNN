@@ -4,9 +4,9 @@ import os
 from models import cnn
 import preprocessor
 import data_loader
-import config
+from config import Config
 
-from app import app
+# from app import app
 
 os.environ["CUDA_VISIBLE_DEVICES"]="0"
 
@@ -21,7 +21,7 @@ class controller:
         self.X_train_add, self.y_train_add = data_loader.load_data('train_add')
         self.X_test, self.y_test = data_loader.load_data('test')
     
-        self.cnn = cnn.model_init(config.input_shape, config.num_classes)
+        self.cnn = cnn.model_init(Config.input_shape, Config.num_classes)
         self.cnn_saved = r'./models/cnn/'
         
         
@@ -30,11 +30,11 @@ class controller:
         """
         
         X_train = preprocessor.preprocess_x(self.X_train)
-        y_train = preprocessor.preprocess_y(self.y_train, config.num_classes)
+        y_train = preprocessor.preprocess_y(self.y_train, Config.num_classes)
         
         self.cnn.fit(X_train, y_train,
-                     batch_size=config.batch_size,
-                     epochs=config.epochs,
+                     batch_size=Config.batch_size,
+                     epochs=Config.epochs,
                      verbose=1
                      )
         
@@ -54,13 +54,13 @@ class controller:
         
         X_train_add = preprocessor.preprocess_x(self.X_train_add)
         y_train_add = preprocessor.preprocess_y(self.y_train_add, 
-                                                config.num_classes)
+                                                Config.num_classes)
         # open pickled cnn model
         cnn_saved_model = load_model(self.cnn_saved)
         
         cnn_saved_model.fit(X_train_add, y_train_add,
-                            batch_size=config.batch_size,
-                            epochs=config.epochs,
+                            batch_size=Config.batch_size,
+                            epochs=Config.epochs,
                             verbose=1
                             )
         
@@ -81,7 +81,7 @@ class controller:
         """
 
         X_test = preprocessor.preprocess_x(self.X_test)
-        y_test = preprocessor.preprocess_y(self.y_test, config.num_classes)
+        y_test = preprocessor.preprocess_y(self.y_test, Config.num_classes)
 
         # open pickled cnn model
         cnn_saved_model = load_model(self.cnn_saved)
@@ -89,3 +89,22 @@ class controller:
         score = cnn_saved_model.evaluate(X_test, y_test, verbose=0)
         print('Test Loss:', score[0])
         print('Test accuracy:', score[1])
+        
+    def predict(self, image:list) -> int:
+        """[summary]
+
+        Args:
+            image (list): [description]
+
+        Returns:
+            int: [description]
+        """
+        
+        # image = preprocessor.preprocess_image(image)
+        
+        # open pickled cnn model
+        cnn_saved_model = load_model(self.cnn_saved)
+        
+        number = cnn_saved_model.predict(image, verbose=0)
+        
+        return number

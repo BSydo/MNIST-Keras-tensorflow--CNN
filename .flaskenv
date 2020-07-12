@@ -1,1 +1,1 @@
-FLASK_APP=controller.py
+FLASK_APP=app
