@@ -1,9 +1,9 @@
 from keras.utils import to_categorical
 from keras import backend as K
 
+from cv2 import cv2
 import numpy as np
 import base64
-import cv2
 
 from config import Config
 
