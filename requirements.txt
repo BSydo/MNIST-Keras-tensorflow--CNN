@@ -110,7 +110,7 @@ python-slugify==4.0.1
 pytz==2019.3
 pyudev==0.21.0
 pyxdg==0.26
-PyYAML==5.3.1
+PyYAML==5.4
 regex==2020.5.14
 reportlab==3.5.34
 requests==2.24.0
